@@ -1,0 +1,13 @@
+#!/bin/bash -xe
+
+curl -s -X PUT -d 'dateOfBirth=1986-01-19' http://localhost:8080/hello/alexey
+curl -s -X PUT -d 'dateOfBirth=1987-06-04' http://localhost:8080/hello/anna
+curl -s -X PUT -d 'dateOfBirth=2017-09-13' http://localhost:8080/hello/mark
+curl -s -X PUT -d 'dateOfBirth=2019-11-30' http://localhost:8080/hello/today
+curl -s -X PUT -d 'dateOfBirth=2017-12-01' http://localhost:8080/hello/tom
+
+curl -s http://localhost:8080/hello/alexey
+curl -s http://localhost:8080/hello/anna
+curl -s http://localhost:8080/hello/mark
+curl -s http://localhost:8080/hello/today
+curl -s http://localhost:8080/hello/tom
