@@ -16,5 +16,5 @@ jobs:
     - run: mvn -B install
     - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
     - run: docker build . --file Dockerfile --tag latest
-    - run: docker push androidleha/revolut:tagname
+    - run: docker push androidleha/revolut:latest
 
