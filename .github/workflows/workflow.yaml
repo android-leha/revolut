@@ -15,6 +15,6 @@ jobs:
         java-version: 1.8
     - run: mvn -B install
     - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-    - run: docker build . --file Dockerfile --tag latest
+    - run: docker build . --file Dockerfile --tag androidleha/revolut:latest
     - run: docker push androidleha/revolut:latest
 
