@@ -3,25 +3,20 @@ kind: Deployment
 metadata:
   name: app
   labels:
-    app.kubernetes.io/name: {{ include "app.name" . }}
-    helm.sh/chart: {{ include "app.chart" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app: revolut
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "hello-world.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+      app: revolut
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "hello-world.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+        app: revolut
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        - name: backend
+          image: "androidleha/revolut:latest"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http

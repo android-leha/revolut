@@ -3,6 +3,10 @@ name: Deployment
 on: [push]
 
 jobs:
+  env:
+    AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_key }}
+    AWS_DEFAULT_REGION: us-west-2
   build:
 
     runs-on: ubuntu-latest
@@ -17,9 +21,13 @@ jobs:
     - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
     - run: docker build . --file Dockerfile --tag androidleha/revolut:latest
     - run: docker push androidleha/revolut:latest
-    - run: helm init --client-only
-    - run: helm package deployment/app
-    - run: ansible --version
-    - run: terraform -version
+#    - run: terraform apply -var 'access_key=${{ secrets.aws_access_key }}' -var 'secret_key=${{ secrets.aws_secret_key }}'
+#      working-directory: ./deployment/terraform
+#    - run: terraform output kubeconfig > ~/.kube/config
+#      working-directory: ./deployment/terraform
+#    - run: helm init
+#      working-directory: ./deployment/app
+#    - run: helm install .
+#      working-directory: ./deployment/app
 
 
