@@ -6,3 +6,5 @@ image:
 service:
   type: NodePort
   port: 80
+db:
+  host: localhost

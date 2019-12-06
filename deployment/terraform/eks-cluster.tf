@@ -46,6 +46,13 @@ resource "aws_security_group" "revolut-cluster" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   tags = {
     Name = "eks-revolut"
   }
@@ -67,8 +74,7 @@ resource "aws_eks_cluster" "revolut" {
   role_arn = aws_iam_role.revolut-cluster.arn
 
   vpc_config {
-    security_group_ids = [
-    aws_security_group.revolut-cluster.id]
+    security_group_ids = [aws_security_group.revolut-cluster.id]
     subnet_ids = aws_subnet.revolut[*].id
   }
 

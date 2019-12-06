@@ -46,7 +46,8 @@ users:
 KUBECONFIG
 
     helmvalues = <<HELMVALUES
-db_host:  ${aws_db_instance.revolut_db.address}
+db:
+  host: ${aws_db_instance.revolut_db.address}
 HELMVALUES
 
 }

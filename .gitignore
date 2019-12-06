@@ -62,3 +62,4 @@ override.tf.json
 
 
 *.local
+local.yaml

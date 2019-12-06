@@ -5,8 +5,8 @@ on: [push]
 jobs:
   build:
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_key }}
+#      AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key }}
+#      AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_key }}
       AWS_DEFAULT_REGION: us-west-2
     runs-on: ubuntu-latest
 
