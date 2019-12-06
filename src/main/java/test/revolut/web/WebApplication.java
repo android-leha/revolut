@@ -3,6 +3,8 @@ package test.revolut.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,7 +27,13 @@ public class WebApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(WebApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(WebApplication.class, args);
+        String[] profiles = ctx.getEnvironment().getActiveProfiles();
+        for (String profile : profiles) {
+            if (profile.equals("db")) {
+                ctx.close();
+            }
+        }
     }
 
     @PutMapping("/hello/{name:[a-z]+}")

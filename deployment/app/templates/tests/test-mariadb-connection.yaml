@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-credentials-test"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: {{ .Release.Name }}-credentials-test
+      image: ellerbrock/alpine-mysql-client
+      env:
+        - name: HOST
+          value: {{ .Values.db.host }}
+        - name: PORT
+          value: "3306"
+        - name: DATABASE_NAME
+          value: "mydb"
+        - name: DATABASE_USER
+          value: "test"
+        - name: DATABASE_PASSWORD
+          value: "12345678"
+      command:
+        - "sh"
+        - "-c"
+        - "mysql --host=$HOST --port=$PORT --user=$DATABASE_USER --password=$DATABASE_PASSWORD"
+  restartPolicy: Never

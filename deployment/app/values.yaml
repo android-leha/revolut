@@ -1,7 +1,5 @@
-replicaCount: 1
+replicaCount: 3
 image:
-  repository: "hello-world"
-  tag: "1.0"
   pullPolicy: Always
 service:
   type: NodePort
