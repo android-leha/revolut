@@ -1,8 +1,6 @@
 package test.revolut.web;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -43,7 +41,7 @@ class UserServiceTest {
     @Test
     void addNonValidUser() {
         Assertions.assertThrows(DateTimeException.class, () -> {
-            userService.add("alex", LocalDate.now().plusDays(1));
+            userService.add("alex", LocalDate.now());
         });
     }
 

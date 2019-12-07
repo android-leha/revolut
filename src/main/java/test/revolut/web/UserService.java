@@ -27,9 +27,9 @@ public class UserService {
 
 
     public void add(String name, LocalDate dateOfBirth) {
-        LocalDate today = getNow();;
-        if (dateOfBirth.compareTo(today) > 0) {
-            throw new DateTimeException("Date should be today or less");
+        LocalDate today = getNow();
+        if (dateOfBirth.compareTo(today) >= 0) {
+            throw new DateTimeException("Date should be less then today");
         }
         userRepository.save(new User(name, dateOfBirth));
     }
