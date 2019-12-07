@@ -1,9 +1,3 @@
-#
-# EKS Cluster Resources
-#  * IAM Role to allow EKS service to manage other AWS services
-#  * EC2 Security Group to allow networking traffic with EKS cluster
-#  * EKS Cluster
-#
 
 resource "aws_iam_role" "revolut-cluster" {
   name = "eks-revolut-cluster"
@@ -59,8 +53,7 @@ resource "aws_security_group" "revolut-cluster" {
 }
 
 resource "aws_security_group_rule" "revolut-cluster-ingress-workstation-https" {
-  cidr_blocks = [
-  local.workstation-external-cidr]
+  cidr_blocks = [local.workstation-external-cidr]
   description       = "Allow workstation to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
