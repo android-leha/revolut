@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrations-{{ .Release.Revision }}
+spec:
+  template:
+    spec:
+      containers:
+        - name: backend
+          env:
+            - name: "spring.profiles.active"
+              value: "db"
+          image: "androidleha/revolut:latest"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+      restartPolicy: Never
+  backoffLimit: 4
