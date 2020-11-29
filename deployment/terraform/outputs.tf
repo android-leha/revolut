@@ -11,7 +11,7 @@ metadata:
   namespace: kube-system
 data:
   mapRoles: |
-    - rolearn: ${aws_iam_role.revolut-node.arn}
+    - rolearn: ${aws_iam_role.miro-node.arn}
       username: system:node:{{EC2PrivateDNSName}}
       groups:
         - system:bootstrappers
@@ -22,8 +22,8 @@ CONFIGMAPAWSAUTH
 apiVersion: v1
 clusters:
 - cluster:
-    server: ${aws_eks_cluster.revolut.endpoint}
-    certificate-authority-data: ${aws_eks_cluster.revolut.certificate_authority.0.data}
+    server: ${aws_eks_cluster.miro.endpoint}
+    certificate-authority-data: ${aws_eks_cluster.miro.certificate_authority.0.data}
   name: kubernetes
 contexts:
 - context:
@@ -42,12 +42,13 @@ users:
       args:
         - "token"
         - "-i"
-        - "${var.cluster-name}"
+        - "${aws_eks_cluster.miro.name}"
 KUBECONFIG
 
     helmvalues = <<HELMVALUES
 db:
-  host: ${aws_db_instance.revolut_db.address}
+  host: ${aws_db_instance.miro_db.address}
+  password: ${random_password.password.result}
 HELMVALUES
 
 }

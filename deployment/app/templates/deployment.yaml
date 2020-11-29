@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: app
   labels:
-    app: revolut
+    app: miro
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -13,27 +13,31 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      app: revolut
+      app: miro
   template:
     metadata:
       labels:
-        app: revolut
+        app: miro
     spec:
+      initContainers:
+        - name: init-myservice
+          image: busybox:1.28
+          command: ['sh', '-c', ""]
       containers:
         - name: backend
-          image: "androidleha/revolut:latest"
+          image: "nginx:1.19.5"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 80
               protocol: TCP
           readinessProbe:
             tcpSocket:
-              port: 8080
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 10
           livenessProbe:
             tcpSocket:
-              port: 8080
+              port: 80
             initialDelaySeconds: 60
             periodSeconds: 30

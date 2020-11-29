@@ -2,7 +2,7 @@ replicaCount: 3
 image:
   pullPolicy: Always
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 80
 db:
   host: localhost
