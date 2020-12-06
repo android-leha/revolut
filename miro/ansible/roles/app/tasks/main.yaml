@@ -1,5 +1,18 @@
 ---
 
+- name: Create web folder
+  file:
+    path: /web
+    state: directory
+    mode: 0777
+
+- name: Copy web
+  copy:
+    src: index.html
+    dest: /web/index.html
+    mode: 0777
+
+
 - name: Create Nginx container
   docker_container:
     name: nginx
@@ -7,3 +20,15 @@
     state: started
     network_mode: host
     detach: true
+    volumes:
+      - /web:/usr/share/nginx/html
+
+- name: Create PHP-FPM container
+  docker_container:
+    name: php
+    image: bitnami/php-fpm:8.0.0-prod-debian-10-r3
+    state: started
+    network_mode: host
+    detach: true
+    volumes:
+      - /web:/app

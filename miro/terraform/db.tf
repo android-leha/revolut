@@ -25,7 +25,8 @@ resource "aws_security_group" "db_sg" {
     from_port = 0
     to_port = 0
     cidr_blocks = [
-      aws_vpc.miro.cidr_block]
+      aws_vpc.miro.cidr_block,
+    ]
   }
 
   egress {

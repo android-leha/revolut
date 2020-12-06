@@ -72,29 +72,11 @@ resource "aws_network_acl" "miro" {
 
   ingress {
     rule_no = 100
-    protocol = "tcp"
+    protocol = "-1"
     action = "allow"
     cidr_block = "0.0.0.0/0"
-    from_port = 22
-    to_port = 22
-  }
-
-  ingress {
-    rule_no = 200
-    protocol = "tcp"
-    action = "allow"
-    cidr_block = "0.0.0.0/0"
-    from_port = 80
-    to_port = 80
-  }
-
-  ingress {
-    rule_no = 300
-    protocol = "tcp"
-    action = "allow"
-    cidr_block = aws_subnet.miro-app.cidr_block
-    from_port = 5432
-    to_port = 5432
+    from_port = 0
+    to_port = 0
   }
 
   egress {
@@ -107,7 +89,7 @@ resource "aws_network_acl" "miro" {
   }
 
   tags = {
-    Name = "Common Network ACL"
+    Name = "Network ACL"
   }
 }
 

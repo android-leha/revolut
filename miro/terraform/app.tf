@@ -29,7 +29,8 @@ resource "aws_security_group" "app_sg" {
     from_port = 80
     to_port = 80
     cidr_blocks = [
-      aws_vpc.miro.cidr_block]
+      aws_subnet.miro-lb.cidr_block,
+    ]
   }
 
   egress {
@@ -37,6 +38,7 @@ resource "aws_security_group" "app_sg" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "0.0.0.0/0",
+    ]
   }
 }

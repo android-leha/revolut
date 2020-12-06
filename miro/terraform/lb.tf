@@ -22,7 +22,8 @@ resource "aws_instance" "lb" {
   key_name = aws_key_pair.admin.key_name
 
   vpc_security_group_ids = [
-    aws_security_group.lb_sg.id]
+    aws_security_group.lb_sg.id,
+  ]
   tags = {
     Name = "Load Balancer Server"
   }
@@ -44,10 +45,20 @@ resource "aws_security_group" "lb_sg" {
 
   ingress {
     protocol = "tcp"
+    from_port = 8080
+    to_port = 8080
+    cidr_blocks = [
+      local.workstation-external-cidr,
+    ]
+  }
+
+  ingress {
+    protocol = "tcp"
     from_port = 80
     to_port = 80
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "0.0.0.0/0",
+    ]
   }
 
   egress {
@@ -55,7 +66,8 @@ resource "aws_security_group" "lb_sg" {
     to_port = 0
     protocol = "-1"
     cidr_blocks = [
-      "0.0.0.0/0"]
+      "0.0.0.0/0",
+    ]
   }
 }
 
@@ -68,7 +80,9 @@ resource "aws_security_group" "jump_sg" {
     protocol = "tcp"
     from_port = 22
     to_port = 22
-    cidr_blocks = ["${aws_instance.lb.private_ip}/32"]
+    cidr_blocks = [
+      "${aws_instance.lb.private_ip}/32",
+    ]
   }
 }
 

@@ -1,5 +1,8 @@
 ---
 
+- selinux:
+    state: disabled
+
 - name: Install docker
   yum:
     name:
