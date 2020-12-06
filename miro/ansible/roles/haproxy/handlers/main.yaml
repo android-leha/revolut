@@ -1,0 +1,4 @@
+---
+
+- name: reload config
+  shell: docker kill -s HUP haproxy

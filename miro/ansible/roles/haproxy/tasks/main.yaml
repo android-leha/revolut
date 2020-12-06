@@ -1,0 +1,23 @@
+---
+
+- name: Create HAproxy config fir
+  file:
+    path: /etc/haproxy
+    state: directory
+
+- name: Create HAproxy config
+  template:
+    src: haproxy.cfg
+    dest: /etc/haproxy/haproxy.cfg
+  notify: reload config
+
+
+- name: Create HAproxy container
+  docker_container:
+    name: haproxy
+    image: haproxy:2.3.2-alpine
+    state: started
+    network_mode: host
+    detach: true
+    volumes:
+      - /etc/haproxy:/usr/local/etc/haproxy:ro

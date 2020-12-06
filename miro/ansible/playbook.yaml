@@ -1,0 +1,22 @@
+
+
+- hosts: load_balancers
+  become_method: sudo
+  become: yes
+  roles:
+    - docker
+    - haproxy
+
+- hosts: applications
+  become_method: sudo
+  become: yes
+  roles:
+    - docker
+    - app
+
+- hosts: databases
+  become_method: sudo
+  become: yes
+  roles:
+    - docker
+    - postgres

@@ -1,0 +1,25 @@
+---
+
+- name: Install docker
+  yum:
+    name:
+      - docker
+      - epel-release
+    state: present
+
+- name: Install pip
+  yum:
+    name: python-pip
+    update_cache: true
+
+- name: Install docker python lib
+  pip:
+    name: docker
+    state: present
+
+- name: Enable docker
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+

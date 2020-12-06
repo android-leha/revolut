@@ -1,0 +1,11 @@
+---
+
+- name: Create Postgresql container
+  docker_container:
+    name: postgres
+    image: postgres:13.1-alpine
+    state: started
+    network_mode: host
+    detach: true
+    env:
+      POSTGRES_HOST_AUTH_METHOD: trust

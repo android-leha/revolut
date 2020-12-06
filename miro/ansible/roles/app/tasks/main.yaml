@@ -1,0 +1,9 @@
+---
+
+- name: Create Nginx container
+  docker_container:
+    name: nginx
+    image: nginx:1.19.5-alpine
+    state: started
+    network_mode: host
+    detach: true
