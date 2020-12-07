@@ -31,4 +31,5 @@ ssh -o StrictHostKeyChecking=no centos@${JUMP_SERVER_IP} 'cd ansible/ && ansible
 # Cleanup private key
 ssh -o StrictHostKeyChecking=no centos@${JUMP_SERVER_IP} 'rm -f ~/.ssh/id_rsa'
 
-echo ${APP_URL}
+echo Application URL: ${APP_URL}
+echo LB status: ${APP_URL}:8080
