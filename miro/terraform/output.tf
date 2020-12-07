@@ -9,8 +9,9 @@ output "inventory" {
   })
 }
 
-output "run_script" {
-  value = templatefile("templates/run.sh", {
+output "exports" {
+  value = templatefile("templates/import.sh", {
     jump = aws_instance.lb.public_ip
+    domain = aws_instance.lb.public_dns
   })
 }
