@@ -31,6 +31,8 @@ However, it can require some changes to adopt it to your environment.
 I took assumption that LB is a Jump server for entire installation.
 I did it, because of problems with running ansible on Windows host. 
 
+Important!!! Run script is uploading your local private key to Jump server.
+
 
 ### Flow
 
@@ -45,5 +47,7 @@ I did it, because of problems with running ansible on Windows host.
    - ALB instead of LB
    - EKS instead of APPs
    - RDS instead of Postgresql
-3. Implement TLS
+3. Implement TLS for all components 
 4. DB backups
+5. Current Postgresql installation is open without a password.  
+    Password can be generated with terraform and persist in application EC2
